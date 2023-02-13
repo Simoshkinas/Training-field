@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-D:\programavimas\basic\Training-field\TicTacToe\obj\Debug\net6.0-windows\
+D:\programavimas\basic\Training-field\TicTacToe\obj\Release\net6.0-windows\
 TicTacToe
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 D:\programavimas\basic\Training-field\TicTacToe\App.xaml
 11407045341
 
