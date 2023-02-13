@@ -1,0 +1,15 @@
+D:\programavimas\basic\AbstractClasses\bin\Debug\net7.0\AbstractClasses.exe
+D:\programavimas\basic\AbstractClasses\bin\Debug\net7.0\AbstractClasses.deps.json
+D:\programavimas\basic\AbstractClasses\bin\Debug\net7.0\AbstractClasses.runtimeconfig.json
+D:\programavimas\basic\AbstractClasses\bin\Debug\net7.0\AbstractClasses.dll
+D:\programavimas\basic\AbstractClasses\bin\Debug\net7.0\AbstractClasses.pdb
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.csproj.AssemblyReference.cache
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.GeneratedMSBuildEditorConfig.editorconfig
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.AssemblyInfoInputs.cache
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.AssemblyInfo.cs
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.csproj.CoreCompileInputs.cache
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.dll
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\refint\AbstractClasses.dll
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.pdb
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\AbstractClasses.genruntimeconfig.cache
+D:\programavimas\basic\AbstractClasses\obj\Debug\net7.0\ref\AbstractClasses.dll
