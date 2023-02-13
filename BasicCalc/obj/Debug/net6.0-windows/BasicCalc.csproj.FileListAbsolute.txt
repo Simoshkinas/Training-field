@@ -1,0 +1,17 @@
+D:\programavimas\basic\BasicCalc\bin\Debug\net6.0-windows\BasicCalc.exe
+D:\programavimas\basic\BasicCalc\bin\Debug\net6.0-windows\BasicCalc.deps.json
+D:\programavimas\basic\BasicCalc\bin\Debug\net6.0-windows\BasicCalc.runtimeconfig.json
+D:\programavimas\basic\BasicCalc\bin\Debug\net6.0-windows\BasicCalc.dll
+D:\programavimas\basic\BasicCalc\bin\Debug\net6.0-windows\BasicCalc.pdb
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.csproj.AssemblyReference.cache
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.Form1.resources
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.csproj.GenerateResource.cache
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.GeneratedMSBuildEditorConfig.editorconfig
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.AssemblyInfoInputs.cache
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.AssemblyInfo.cs
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.csproj.CoreCompileInputs.cache
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.dll
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\refint\BasicCalc.dll
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.pdb
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\BasicCalc.genruntimeconfig.cache
+D:\programavimas\basic\BasicCalc\obj\Debug\net6.0-windows\ref\BasicCalc.dll
