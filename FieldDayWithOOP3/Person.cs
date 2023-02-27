@@ -41,7 +41,7 @@
         internal static int Validate()
         {
             var str = Console.ReadLine();
-            if (!(int.TryParse(str, out var nmbr)) && !(nmbr < 0))
+            if (!(int.TryParse(str, out var nmbr)) || nmbr < 0)
                 Console.WriteLine("Unrecognised input");
             return nmbr;
         }
