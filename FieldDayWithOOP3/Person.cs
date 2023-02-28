@@ -4,9 +4,21 @@
     {
         #region Fields
         private string _firstName, _lastName;
+        private int _age;
         #endregion
         #region Properties
-        internal int Age { get; set; }
+        internal int Age 
+        { 
+            get
+            { return _age; } 
+            set
+            {
+                if (!(value < 0))
+                {
+                    _age = value;
+                }
+            } 
+        }
         internal string Gender { get; set; } 
         #endregion
         #region Constructor
@@ -41,7 +53,7 @@
         internal static int Validate()
         {
             var str = Console.ReadLine();
-            if (!(int.TryParse(str, out var nmbr)) || nmbr < 0)
+            if (!(int.TryParse(str, out var nmbr)))
                 Console.WriteLine("Unrecognised input");
             return nmbr;
         }
