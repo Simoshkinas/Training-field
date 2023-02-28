@@ -39,7 +39,7 @@
                 persons.Add(person);
             }
             Console.WriteLine("List of persons are: ");
-            for (var i = 0; i < n; i++)
+            for (var i = 0; i < persons.Count; i++)
             {
                 persons[i].GetFullInfo();
             }
