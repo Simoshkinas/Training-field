@@ -8,15 +8,13 @@
         #endregion
         #region Properties
         internal int Age 
-        { 
-            get
-            { return _age; } 
-            set
+        {
+            get => _age;
+ 
+            set 
             {
                 if (!(value < 0))
-                {
                     _age = value;
-                }
             } 
         }
         internal string Gender { get; set; } 
