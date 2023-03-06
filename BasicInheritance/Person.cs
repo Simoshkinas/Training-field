@@ -4,11 +4,13 @@
     {
         internal string FirstName { get; set; }
         internal string LastName { get; set; }
+        internal int Age { get; set; }
 
-        internal Person(string firstName, string lastName)
+        internal Person(string firstName, string lastName, int age)
         {
             FirstName = firstName;
             LastName = lastName;
+            Age = age;
         }
         internal virtual void Greetings()
         {
