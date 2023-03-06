@@ -1,4 +1,7 @@
-﻿namespace MeetingApp
+﻿using Newtonsoft.Json;
+using System;
+using System.Text.Json;
+namespace MeetingApp
 {
     internal class Program
     {
@@ -6,14 +9,21 @@
         {
             var meetings = new List<Meeting>();
 
+
             
         }
-
-        internal static Meeting CreateMeeting()
+        /// <summary>
+        /// Creates a new Meeting
+        /// </summary>
+        internal static void CreateMeeting()
         {
             var meeting = new Meeting("Intro", "Introductory meeting", "Jonas", "Short", "Live", "2023-10-01", "2023-10-02");
-            return meeting;
+            SaveData(meeting);
         }
+        /// <summary>
+        /// Displays a full info of a particular meeting
+        /// </summary>
+        /// <param name="meeting">Specific meeting, who's info is to be displayed</param>
         internal static void DisplayFullInfo(Meeting meeting)
         {
             Console.WriteLine("Meeting name: " + meeting.Name);
@@ -23,8 +33,16 @@
             Console.WriteLine("Meeting Type: " + meeting.Type);
             Console.WriteLine("Meeting Start date: " + meeting.StartDate);
             Console.WriteLine("Meeting End date: " + meeting.EndDate);
-            Console.WriteLine("Meeting members:");
             meeting.DisplayParticipants();
+        }
+        /// <summary>
+        /// Saves a meeting to JSON file
+        /// </summary>
+        /// <param name="meeting">Specific meeting, who's data will be saved</param>
+        internal static void SaveData(Meeting meeting) 
+        {
+            string json = JsonConvert.SerializeObject(meeting, Formatting.Indented);
+            File.WriteAllText("person.json", json);
         }
     }
 }

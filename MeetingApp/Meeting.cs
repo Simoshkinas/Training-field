@@ -44,6 +44,7 @@
         }
         #endregion
         #region Methods
+
         /// <summary>
         /// Adds a person to the participants of that meeting
         /// </summary>
@@ -57,7 +58,7 @@
         /// </summary>
         internal void DisplayParticipants()
         {
-            Console.WriteLine("Members of ther meeting:");
+            Console.WriteLine("Members of the meeting:");
             for (var i = 0;  i < _participants.Count; i++)
                 Console.WriteLine(_participants[i]);    
         }
