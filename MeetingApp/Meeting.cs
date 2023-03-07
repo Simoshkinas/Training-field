@@ -3,7 +3,7 @@
     internal class Meeting
     {
         #region Fields
-        private readonly List<string> _participants;
+        internal List<string> _participants;
         #endregion
         #region Properties
         internal string Name { get; set; }
@@ -41,26 +41,6 @@
             StartDate = startDate;
             EndDate = endDate;
             _participants = new List<string>();
-        }
-        #endregion
-        #region Methods
-
-        /// <summary>
-        /// Adds a person to the participants of that meeting
-        /// </summary>
-        /// <param name="member">A person, who will be added to the participants list</param>
-        internal void AddParticipant(string member)
-        {
-            _participants.Add(member);
-        }
-        /// <summary>
-        /// Displays all members of a meeting
-        /// </summary>
-        internal void DisplayParticipants()
-        {
-            Console.WriteLine("Members of the meeting:");
-            for (var i = 0;  i < _participants.Count; i++)
-                Console.WriteLine(_participants[i]);    
         }
         #endregion
     }
