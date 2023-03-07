@@ -1,14 +1,16 @@
-﻿namespace MeetingApp
+﻿using System;
+
+namespace MeetingApp
 {
     internal class Meeting
     {
         #region Fields
-        internal List<string> _participants;
+        internal List<Person> _participants;
         #endregion
         #region Properties
         internal string Name { get; set; }
         internal string Description { get; set; }
-        internal string ResponsiblePerson { get; set; }
+        internal Person ResponsiblePerson { get; set; }
         internal string Category { get; set; }
         internal string Type { get; set; }
         internal string StartDate { get; set; }
@@ -27,7 +29,7 @@
         /// <param name="endDate"></param>
         internal Meeting(string name, 
                          string description, 
-                         string responsiblePerson, 
+                         Person responsiblePerson, 
                          string category, 
                          string type, 
                          string startDate, 
@@ -40,7 +42,7 @@
             Type = type;
             StartDate = startDate;
             EndDate = endDate;
-            _participants = new List<string>();
+            _participants = new List<Person>();
         }
         #endregion
     }
