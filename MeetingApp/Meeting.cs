@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MeetingApp
+﻿namespace MeetingApp
 {
     internal class Meeting
     {

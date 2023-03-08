@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Xml.Linq;
+using System.Runtime.CompilerServices;
 
 namespace MeetingApp
 {
@@ -16,12 +16,12 @@ namespace MeetingApp
         /// <param name="startDate">Meeting start date</param>
         /// <param name="endDate">Meeting end date</param>
         internal static Meeting CreateMeeting(string name,
-                                           string description,
-                                           Person responsiblePerson,
-                                           string category,
-                                           string type,
-                                           string startDate,
-                                           string endDate)
+                                              string description,
+                                              Person responsiblePerson,
+                                              string category,
+                                              string type,
+                                              string startDate,
+                                              string endDate)
         {
             return new Meeting(name, description, responsiblePerson, category, type, startDate, endDate);
         }
@@ -30,9 +30,13 @@ namespace MeetingApp
 /// </summary>
 /// <param name="meetings">Meeting list from witch a single meeting will be removed</param>
 /// <param name="meeting">A specific meeting to be removed</param>
-        internal static void DeleteMeeting(List<Meeting> meetings, Meeting meeting) 
+/// <param name="responsiblePerson">Person, who is responsible for a particular meeting</param>
+        internal static void DeleteMeeting(List<Meeting> meetings, Meeting meeting, Person responsiblePerson) 
         {
-                meetings.Remove(meetings.FirstOrDefault(meeting));
+            if (responsiblePerson != meeting.ResponsiblePerson)
+                Console.WriteLine("Delete meeting failed. Only responsible person can delete this meeting.");
+            else
+                meetings.Remove(meeting);
         }
         /// <summary>
         /// Removes a participant from a specific meeting
@@ -41,10 +45,13 @@ namespace MeetingApp
         /// <param name="memeber">Participant to be removed</param>
         internal static void RemoveParticipant(Meeting meeting, Person memeber)
         {
-            meeting._participants.Remove(meeting._participants.FirstOrDefault(memeber));
+            if (meeting.ResponsiblePerson.Id == memeber.Id)
+                Console.WriteLine("Responsible person cannot be removed from this particular meeting.");
+            else
+                meeting._participants.Remove(meeting._participants.FirstOrDefault(memeber));
         }
         /// <summary>
-        /// Displays a full info of a particular meeting
+        /// Displays a full info of a particular meeting (unfinished, filters needed)
         /// </summary>
         /// <param name="meeting">Specific meeting, who's info is to be displayed</param>
         internal static void DisplayFullInfo(Meeting meeting)
@@ -57,19 +64,21 @@ namespace MeetingApp
             Console.WriteLine($"Meeting Start date: {meeting.StartDate}");
             Console.WriteLine($"Meeting End date: {meeting.EndDate}");
             DisplayParticipants(meeting);
+            Console.WriteLine();
         }
         /// <summary>
-        /// Saves a meeting to JSON file
+        /// Saves a meeting to JSON file (unfinished)
         /// </summary>
         /// <param name="meeting">Specific meeting, who's data will be saved</param>
-        internal static void SaveData(Meeting meeting)
+        internal static void SaveData(Meeting meeting, string path)
         {
             string json = JsonConvert.SerializeObject(meeting, Formatting.Indented);
-            File.WriteAllText("meeting.json", json);
+            File.WriteAllText(path, json);
         }
         /// <summary>
-        /// Displays all members of a meeting
+        /// Displays all members of a meeting (unfinished, filters needed)
         /// </summary>
+        /// <param name="meeting">Specific meeting, who's participants will be displayed</param>
         internal static void DisplayParticipants(Meeting meeting)
         {
             Console.WriteLine("Members of the meeting:");
@@ -77,13 +86,25 @@ namespace MeetingApp
                 Console.WriteLine($"{ meeting._participants[i].FirstName} { meeting._participants[i].LastName}");
         }
         /// <summary>
-        /// Adds a person to the participants of that meeting
+        /// Adds a person to the participants of that meeting (not finished).
         /// </summary>
         /// <param name="meeting">A meeting, to witch a participant will be added</param>
         /// <param name="member">A person, who will be added to the participants list</param>
         internal static void AddParticipant(Meeting meeting, Person member)
         {
-            meeting._participants.Add(member);
+            if (meeting._participants.Contains(member) || meeting.ResponsiblePerson.Id == member.Id)
+                Console.WriteLine("This person is already in a meeting. Unable to add.");
+            else
+                meeting._participants.Add(member);
+        }
+        /// <summary>
+        /// Displays list of all meetings (unfinished, filters needed)
+        /// </summary>
+        /// <param name="meetings">List of all meetings to be displayed</param>
+        internal static void DisplayAllMeetings(List<Meeting> meetings) 
+        {
+            for (var i = 0; i < meetings.Count; i++)
+                Console.WriteLine($"{meetings[i].Name}");
         }
     }
 }
