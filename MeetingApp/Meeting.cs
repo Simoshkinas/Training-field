@@ -11,8 +11,8 @@
         internal Person ResponsiblePerson { get; set; }
         internal string Category { get; set; }
         internal string Type { get; set; }
-        internal string StartDate { get; set; }
-        internal string EndDate { get; set; }
+        internal DateTime StartDate { get; set; }
+        internal DateTime EndDate { get; set; }
         #endregion
         #region Constructor
         /// <summary>
@@ -30,8 +30,8 @@
                          Person responsiblePerson, 
                          string category, 
                          string type, 
-                         string startDate, 
-                         string endDate)
+                         DateTime startDate, 
+                         DateTime endDate)
         {
             Name = name;
             Description = description;
@@ -43,5 +43,7 @@
             _participants = new List<Person>();
         }
         #endregion
+
+        
     }
 }

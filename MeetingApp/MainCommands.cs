@@ -1,10 +1,144 @@
 ﻿using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace MeetingApp
 {
     internal static class MainCommands
     {
+        /// <summary>
+        /// Displays a greeting message
+        /// </summary>
+        internal static void GiveGreeting()
+        {
+            Console.WriteLine("Welcome to the MeetingAPP");
+        }
+        /// <summary>
+        /// Displays choises for the user to take at the start of the app.
+        /// </summary>
+        internal static void DisplayStartingChoises()
+        {
+            Console.WriteLine("Please, choose the following: ");
+            Console.WriteLine("A: Create a new Meeting; B: Add person to a meeting; C: List all meetings; D: Exit application; ");
+        }
+        /// <summary>
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
+        /// </summary>
+        /// <returns>Returns input value</returns>
+        internal static string GetChoice(string choice)
+        {
+            string validatedChoice;
+            while (true)
+            {
+                if (choice.Length > 0 && (choice == "A" || choice == "B" || choice == "C" || choice == "D"))
+                {
+                    validatedChoice = choice;
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                    choice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+        }
+        /// <summary>
+        /// Gives a specific Category, which is predefined value, tu the particular meeting
+        /// </summary>
+        /// <param name="choice">Choice value given by the user</param>
+        /// <returns>Predefined value of category chosen by the user</returns>
+        internal static string GetCategory(string choice)
+        {
+            switch (choice) 
+            {
+                case "A":
+                    choice = "CodeMonkey";
+                    break;
+                case "B":
+                    choice = "Hub";
+                    break;
+                case "C":
+                    choice = "Short";
+                    break;
+                case "D":
+                    choice = "TeamBuilding";
+                    break;
+            }
+            return choice;
+        }
+        /// <summary>
+        /// Validates and sets meeting type based by the choice of the user
+        /// </summary>
+        /// <param name="choice">User input based of Fixed values</param>
+        /// <returns>Returns fixed value of Meeting Type </returns>
+        internal static string GetType(string choice)
+        {
+            string validatedChoice;
+            while (true)
+            {
+                if (choice.Length > 0 && (choice == "A" || choice == "B"))
+                {
+                    validatedChoice = choice;
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                choice = Console.ReadLine().ToUpper();
+            }
+            switch (validatedChoice)
+            {
+                case "A":
+                    validatedChoice = "Live";
+                    break;
+                case "B":
+                    validatedChoice = "InPerson";
+                    break;
+            }
+            return validatedChoice;
+        }
+        /// <summary>
+        /// Reads input of the user, and prevents entering blank text.
+        /// </summary>
+        /// <param name="input">Input which is reead from the console that user has entered</param>
+        /// <returns>validated input</returns>
+        internal static string GatherInput(string input) 
+        {
+            string validatedInput;
+            while (true)
+            {
+                if (input.Length > 0)
+                {
+                    validatedInput = input;
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                input = Console.ReadLine();
+            }
+            return validatedInput;
+        }
+        /// <summary>
+        /// Reads ID given by the user, a specific parameter, which is validated
+        /// </summary>
+        /// <returns>Returns a validated ID value</returns>
+        internal static int GetId()
+        {
+            var str = Console.ReadLine();
+            if (!(int.TryParse(str, out var number)))
+                Console.WriteLine("Unrecognised input:");
+            return number;
+        }
+        /// <summary>
+        /// Reads date from User input, and validates value
+        /// </summary>
+        /// <returns>Returns validated date</returns>
+        internal static DateTime GetDateTime(string message)
+        {
+            Console.WriteLine(message);
+            DateTime enteredDate;
+            while (!DateTime.TryParse(Console.ReadLine(), out enteredDate))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid date and time (MM/dd/yyyy hh:mm:ss): ");
+            }
+            return enteredDate;
+        }
         /// <summary>
         /// Creates a new Meeting
         /// </summary>
@@ -20,8 +154,8 @@ namespace MeetingApp
                                               Person responsiblePerson,
                                               string category,
                                               string type,
-                                              string startDate,
-                                              string endDate)
+                                              DateTime startDate,
+                                              DateTime endDate)
         {
             return new Meeting(name, description, responsiblePerson, category, type, startDate, endDate);
         }
