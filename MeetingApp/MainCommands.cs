@@ -17,7 +17,7 @@ namespace MeetingApp
         internal static void DisplayStartingChoises()
         {
             Console.WriteLine("Please, choose the following: ");
-            Console.WriteLine("A: Create a new Meeting; B: Add person to a meeting; C: List all meetings; D: Exit application; ");
+            Console.WriteLine("A: Create a new Meeting; B: Delete meeting; C: Edit an existing meeting; D: List all meetings; E: Exit application;");
         }
         /// <summary>
         /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
@@ -28,7 +28,7 @@ namespace MeetingApp
             string validatedChoice;
             while (true)
             {
-                if (choice.Length > 0 && (choice == "A" || choice == "B" || choice == "C" || choice == "D"))
+                if (choice.Length > 0 && (choice == "A" || choice == "B" || choice == "C" || choice == "D" || choice == "E"))
                 {
                     validatedChoice = choice;
                     break;
@@ -239,6 +239,34 @@ namespace MeetingApp
         {
             for (var i = 0; i < meetings.Count; i++)
                 Console.WriteLine($"{meetings[i].Name}");
+        }
+        /// <summary>
+        /// Returns specific responsible person who is in a meeting by person ID
+        /// </summary>
+        /// <param name="meeting">Meeting, from which person is needed</param>
+        /// <param name="id">Specific person ID</param>
+        /// <returns>Full info for a particular person</returns>
+        internal static Person GetResponsiblePersonById(Meeting meeting, int id)
+        {
+            if (!(meeting.ResponsiblePerson.Id == id))
+                Console.WriteLine("Person is not responsible for this meeting, try again:");
+            return meeting.ResponsiblePerson;
+        }
+        internal static string GetYesNo()
+        {
+            string validatedChoice = Console.ReadLine().ToUpper();
+            while (true)
+            {
+                if (validatedChoice.Length > 0 && (validatedChoice == "Y" || validatedChoice == "N"))
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                validatedChoice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+
         }
     }
 }
