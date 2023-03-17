@@ -131,11 +131,11 @@ namespace MeetingApp
         /// <returns>Returns validated date</returns>
         internal static DateTime GetDateTime(string message)
         {
-            Console.WriteLine(message);
+            Console.Write(message);
             DateTime enteredDate;
             while (!DateTime.TryParse(Console.ReadLine(), out enteredDate))
             {
-                Console.WriteLine("Invalid input. Please enter a valid date and time (MM/dd/yyyy hh:mm:ss): ");
+                Console.Write("Invalid input. Please enter a valid date and time (MM/dd/yyyy hh:mm:ss): ");
             }
             return enteredDate;
         }

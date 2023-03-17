@@ -6,6 +6,7 @@
         {
             var programRun = true;
             var meetings = new List<Meeting>();
+            
             //Message to be displayed when starting an app
             MainCommands.GiveGreeting();
             //Gives choises for the user
@@ -64,9 +65,9 @@
                         Console.Write("Enter name of the meeting you want to delete:");
                         var deletableMeetingName = MainCommands.GatherInput(Console.ReadLine());
                         Console.WriteLine($"Meeting to be deleted: {deletableMeetingName}");
-                        var deletableMeeting = meetings.FirstOrDefault(o => o.Name == deletableMeetingName);
+                        var deletableMeeting = meetings.FirstOrDefault(meeting => meeting.Name == deletableMeetingName);
                         Console.WriteLine();
-                        Console.Write("Enter person ID, who isd responsible for this meeting:");
+                        Console.Write("Enter person ID, who is responsible for this meeting:");
                         var responsibleId = MainCommands.GetId();
                         var resPerson = MainCommands.GetResponsiblePersonById(deletableMeeting, responsibleId);
                         Console.WriteLine($"Responsible person: {resPerson.FirstName} {resPerson.LastName}");
@@ -85,17 +86,31 @@
                         var addParticipantMeetingName = MainCommands.GatherInput(Console.ReadLine());
                         Console.WriteLine($"Chosen meeting: {addParticipantMeetingName}");
                         Console.WriteLine();
-                        /*
-                         
+                        Console.Write("Enter person ID: ");
+                        var personId = MainCommands.GetId();
+                        Console.WriteLine($"Person ID: {personId}");
+                        Console.WriteLine();
+                        Console.Write("Enter first name: ");
+                        var personName = MainCommands.GatherInput(Console.ReadLine());
+                        Console.WriteLine($"First name: {personName}");
+                        Console.WriteLine();
+                        Console.WriteLine("Enter last name: ");
+                        var personSurname = MainCommands.GatherInput(Console.ReadLine());
+                        Console.WriteLine($"Last name: {personSurname}");
+                        Console.WriteLine();
+                        var date = MainCommands.GetDateTime("Enter date, from which this person will be added to the meeting: "); //a date, from which a person is being added
+                        var newParticipant = new Person(personId, personName, personSurname);
+                        var editedMeeting = meetings.FirstOrDefault(meeting => meeting.Name == addParticipantMeetingName);
+                        MainCommands.AddParticipant(editedMeeting, newParticipant);
+                        Console.WriteLine($"{newParticipant.FirstName} {newParticipant.LastName} is added to a meeting: {editedMeeting}");
+                        /*                         
                          Command should specify who is being added and at what time.
-                         If a person is already in a meeting which intersects with the one being added,
-                         a warning message should be given.
-                         Prevent the same person from being added twice
-
+                        
                         */
                         break;
                     case "D":
                         //List all meetings
+                        MainCommands.DisplayAllMeetings(meetings); //Temporary line, for testing purposes
                         /*
                          Filter by description (if the description is “Jono .NET meetas”, searching for
                          .NET should return this entry)
