@@ -268,5 +268,24 @@ namespace MeetingApp
             return validatedChoice;
 
         }
+        /// <summary>
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
+        /// </summary>
+        /// <returns>Validated user input</returns>
+        internal static string GetTwoChoices()
+        {
+            string validatedChoice = Console.ReadLine().ToUpper();
+            while (true)
+            {
+                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B"))
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                validatedChoice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+        }
     }
 }

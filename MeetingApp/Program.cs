@@ -72,44 +72,68 @@
                         var resPerson = MainCommands.GetResponsiblePersonById(deletableMeeting, responsibleId);
                         Console.WriteLine($"Responsible person: {resPerson.FirstName} {resPerson.LastName}");
                         Console.Write("Delete this meeting? Y 'Yes'/N 'No':");
+                        Console.WriteLine();
                         var userChoice2 = MainCommands.GetYesNo();
                         if (userChoice2 == "Y")
+                        {
                             MainCommands.DeleteMeeting(meetings, deletableMeeting, resPerson);
-                        Console.WriteLine();
-                        Console.WriteLine($"Meeting {deletableMeeting.Name} has been deleted from list.");
+                            Console.WriteLine($"Meeting {deletableMeeting.Name} has been deleted from list.");
+                        }
                         break;
                     case "C":
-                        //Add person to a meeting
                         MainCommands.DisplayAllMeetings(meetings);
                         Console.WriteLine();
-                        Console.Write("Choose a meeting to which you would like to add a participant (enter name): ");
+                        Console.Write("Choose a meeting to which you would like to edit (enter name): ");
                         var addParticipantMeetingName = MainCommands.GatherInput(Console.ReadLine());
                         Console.WriteLine($"Chosen meeting: {addParticipantMeetingName}");
-                        Console.WriteLine();
-                        Console.Write("Enter person ID: ");
-                        var personId = MainCommands.GetId();
-                        Console.WriteLine($"Person ID: {personId}");
-                        Console.WriteLine();
-                        Console.Write("Enter first name: ");
-                        var personName = MainCommands.GatherInput(Console.ReadLine());
-                        Console.WriteLine($"First name: {personName}");
-                        Console.WriteLine();
-                        Console.WriteLine("Enter last name: ");
-                        var personSurname = MainCommands.GatherInput(Console.ReadLine());
-                        Console.WriteLine($"Last name: {personSurname}");
-                        Console.WriteLine();
-                        var date = MainCommands.GetDateTime("Enter date, from which this person will be added to the meeting: "); //a date, from which a person is being added
-                        var newParticipant = new Person(personId, personName, personSurname);
                         var editedMeeting = meetings.FirstOrDefault(meeting => meeting.Name == addParticipantMeetingName);
-                        MainCommands.AddParticipant(editedMeeting, newParticipant);
-                        Console.WriteLine($"{newParticipant.FirstName} {newParticipant.LastName} is added to a meeting: {editedMeeting}");
+                        //Add person to a meeting, and delete person from a meeting (unfinished)
+                        Console.WriteLine("Choose the following option from below.");
+                        Console.WriteLine("'A' - Add person to a meeting; 'B' - Remove person from pas particular meeting;");
+                        var userChoice3 = MainCommands.GetTwoChoices();
+                        switch (userChoice3)
+                        {
+                            case "A":
+                                {
+                                    //Add person to a meeting
+                                    Console.WriteLine();
+                                    Console.Write("Enter person ID: ");
+                                    var personId = MainCommands.GetId();
+                                    Console.WriteLine($"Person ID: {personId}");
+                                    Console.WriteLine();
+                                    Console.Write("Enter first name: ");
+                                    var personName = MainCommands.GatherInput(Console.ReadLine());
+                                    Console.WriteLine($"First name: {personName}");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Enter last name: ");
+                                    var personSurname = MainCommands.GatherInput(Console.ReadLine());
+                                    Console.WriteLine($"Last name: {personSurname}");
+                                    Console.WriteLine();
+                                    var date = MainCommands.GetDateTime("Enter date, from which this person will be added to the meeting: "); //a date, from which a person is being added
+                                    var newParticipant = new Person(personId, personName, personSurname);
+                                    MainCommands.AddParticipant(editedMeeting, newParticipant);
+                                    Console.WriteLine($"{newParticipant.FirstName} {newParticipant.LastName} is added to a meeting: {editedMeeting}");
+                                    break;
+                                }
+                            case "B":
+                                //Remove participant from a meeting
+                                {
+                                    Console.WriteLine();
+                                    Console.Write("Enter person ID: ");
+                                    var personId = MainCommands.GetId();
+                                    Console.WriteLine($"Person ID: {personId}");
+                                    Console.WriteLine(); 
+                                    MainCommands.RemoveParticipant(editedMeeting, editedMeeting._participants.FirstOrDefault(participant => participant.Id == personId));
+                                    break;
+                                }
+                        }   
+                        //Unfinished
                         /*                         
                          Command should specify who is being added and at what time.
-                        
                         */
                         break;
                     case "D":
-                        //List all meetings
+                        //List all meetings, unfinished
                         MainCommands.DisplayAllMeetings(meetings); //Temporary line, for testing purposes
                         /*
                          Filter by description (if the description is “Jono .NET meetas”, searching for
