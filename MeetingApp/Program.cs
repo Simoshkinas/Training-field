@@ -135,16 +135,82 @@
                     case "D":
                         //List all meetings, unfinished
                         MainCommands.DisplayAllMeetings(meetings); //Temporary line, for testing purposes
+                        Console.WriteLine("Choose the parameter you want to filter all meetings by:");
+                        Console.WriteLine("A: Description; B: Responsible Person; C: Category; D: Type; E: Dates; F: Number of attendees;");
+                        var userChoice4 = MainCommands.GetChoice3();
+                        switch (userChoice4)
+                        {
+                            case "A":
+                                {
+                                    //Filter by description
+                                    Console.Write("Enter meeting description: ");
+                                    var filteredString = MainCommands.GatherInput(Console.ReadLine());
+                                    //Main filter by description, move to main commands needed
+                                    var filteredMeetings = meetings.Where(o => o.Description.Contains(filteredString)).ToList(); 
+                                    MainCommands.DisplayAllMeetings(filteredMeetings);
+                                    break;
+                                }
+                            case "B":
+                                {
+                                    //Filter by Responsible person
+                                    Console.Write("Enter responsible person ID: ");
+                                    var filteredResponsiblePersonId = MainCommands.GetId();
+                                    //Main filter by responsible person, move to main commands needed
+                                    var filteredMeetings = meetings.Where(o => o.ResponsiblePerson.Id.Equals(filteredResponsiblePersonId)).ToList();
+                                    MainCommands.DisplayAllMeetings(filteredMeetings);
+                                    break;
+                                }
+                            case "C":
+                                {
+                                    //Filter by category
+                                    Console.Write("Enter meeting category: ");
+                                    var filteredCategory = MainCommands.GetCategory(MainCommands.GetChoice2());
+                                    //main filter by category, move to main commands needed
+                                    var filteredMeetings = meetings.Where(o => o.Category.Equals(filteredCategory)).ToList();
+                                    MainCommands.DisplayAllMeetings(filteredMeetings);
+                                    break;
+                                }
+                            case "D":
+                                {
+                                    //Filter by type
+                                    Console.Write("Enter meeting type: ");
+                                    var filteredType = MainCommands.GetType(MainCommands.GatherInput(Console.ReadLine().ToUpper()));
+                                    //main filter by type, move to main commands needed
+                                    var filteredMeetings = meetings.Where(o => o.Type.Equals(filteredType)).ToList();
+                                    MainCommands.DisplayAllMeetings(filteredMeetings);
+                                    break;
+                                }
+                            case "E":
+                                {
+                                    //Filter by dates
+                                    Console.WriteLine("Enter Date time range.");
+                                    var filteredStartDate = MainCommands.GetDateTime("Enter start Date (MM/dd/yyyy hh:mm:ss): ");
+                                    var filteredEndDate = MainCommands.GetDateTime("Enter end Date (MM/dd/yyyy hh:mm:ss): ");
+                                    //main filter by date range, move to main commands needed
+                                    var filteredMeetings = meetings.Where(o => o.StartDate >= filteredStartDate && o.EndDate <= filteredEndDate).ToList();
+                                    MainCommands.DisplayAllMeetings(filteredMeetings);
+                                    break;
+                                }
+                            case "F":
+                                {
+                                    //Filter by number of attendees, not finished
+                                    Console.WriteLine("Specifiy, how you want to filter by number of attendees.");
+                                    Console.Write("Enter attendees number to filter meetings by: ");
+                                    var filterNumber = int.Parse(Console.ReadLine());
+                                    var filteredMeetings = meetings.Where(o => o._participants.Count >= filterNumber).ToList();
+                                    break;
+                                }
+                        }
                         /*
                          Filter by description (if the description is “Jono .NET meetas”, searching for
                          .NET should return this entry)
-                         Filter by responsible person
-                         Filter by category
-                         Filter by type
+                         Filter by responsible person /done
+                         Filter by category /done
+                         Filter by type /done
                          Filter by dates (e.g meetings that will happen starting from 2022-01-01 /
-                         meetings that will happen between 2022-01-01 and 2022-02-01)
+                         meetings that will happen between 2022-01-01 and 2022-02-01) /done
                          Filter by the number of attendees (e.g show meetings that have over 10
-                         people attending)
+                         people attending) /partially done
                         */
                         break;
                     case "E":

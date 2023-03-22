@@ -20,7 +20,7 @@ namespace MeetingApp
             Console.WriteLine("A: Create a new Meeting; B: Delete meeting; C: Edit an existing meeting; D: List all meetings; E: Exit application;");
         }
         /// <summary>
-        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly, 5 choices
         /// </summary>
         /// <returns>Returns input value</returns>
         internal static string GetChoice(string choice)
@@ -36,6 +36,25 @@ namespace MeetingApp
                 else
                     Console.WriteLine("Wrong input, try again: ");
                     choice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+        }
+        /// <summary>
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly, 4 choices
+        /// </summary>
+        /// <returns>Returns input value</returns>
+        internal static string GetChoice2()
+        {
+            var validatedChoice = Console.ReadLine().ToUpper();
+            while (true)
+            {
+                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D"))
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                validatedChoice = Console.ReadLine().ToUpper();
             }
             return validatedChoice;
         }
@@ -252,6 +271,10 @@ namespace MeetingApp
                 Console.WriteLine("Person is not responsible for this meeting, try again:");
             return meeting.ResponsiblePerson;
         }
+        /// <summary>
+        /// Simple method to read user choice in a form "Yes" and "No"
+        /// </summary>
+        /// <returns>Validated user input</returns>
         internal static string GetYesNo()
         {
             string validatedChoice = Console.ReadLine().ToUpper();
@@ -278,6 +301,25 @@ namespace MeetingApp
             while (true)
             {
                 if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B"))
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                validatedChoice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+        }
+        /// <summary>
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
+        /// </summary>
+        /// <returns>Returns input value</returns>
+        internal static string GetChoice3()
+        {
+            string validatedChoice = Console.ReadLine().ToUpper();
+            while (true)
+            {
+                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D" || validatedChoice == "E" || validatedChoice == "F"))
                 {
                     break;
                 }
