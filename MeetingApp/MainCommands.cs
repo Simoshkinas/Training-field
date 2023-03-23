@@ -311,7 +311,7 @@ namespace MeetingApp
             return validatedChoice;
         }
         /// <summary>
-        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly, 6 choices
         /// </summary>
         /// <returns>Returns input value</returns>
         internal static string GetChoice3()
@@ -320,6 +320,25 @@ namespace MeetingApp
             while (true)
             {
                 if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D" || validatedChoice == "E" || validatedChoice == "F"))
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong input, try again: ");
+                validatedChoice = Console.ReadLine().ToUpper();
+            }
+            return validatedChoice;
+        }
+        /// <summary>
+        /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly, 3 choices
+        /// </summary>
+        /// <returns></returns>
+        internal static string GetChoice4()
+        {
+            var validatedChoice = Console.ReadLine().ToUpper();
+            while (true)
+            {
+                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C"))
                 {
                     break;
                 }

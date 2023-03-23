@@ -197,21 +197,35 @@
                                     Console.WriteLine("Specifiy, how you want to filter by number of attendees.");
                                     Console.Write("Enter attendees number to filter meetings by: ");
                                     var filterNumber = int.Parse(Console.ReadLine());
-                                    var filteredMeetings = meetings.Where(o => o._participants.Count >= filterNumber).ToList();
+                                    Console.WriteLine("Choose filter type.");
+                                    Console.WriteLine("A: Equal to chosen number; B: More then chosen number; C: less then chosen number;");
+                                    switch (MainCommands.GetChoice4())
+                                    {
+                                        case "A":
+                                            {
+                                                var filteredMeetings = meetings.Where(o => o._participants.Count == filterNumber).ToList();
+                                                Console.WriteLine($"Meetings who have {filterNumber} attendees:");
+                                                MainCommands.DisplayAllMeetings(filteredMeetings);
+                                                break;
+                                            }
+                                        case "B":
+                                            {
+                                                var filteredMeetings = meetings.Where(o => o._participants.Count >= filterNumber).ToList();
+                                                Console.WriteLine($"Meetings who have more then {filterNumber} attendees:");
+                                                MainCommands.DisplayAllMeetings(filteredMeetings);
+                                                break;
+                                            }
+                                        case "C":
+                                            {
+                                                var filteredMeetings = meetings.Where(o => o._participants.Count <= filterNumber).ToList();
+                                                Console.WriteLine($"Meetings who have less then {filterNumber} attendees:");
+                                                MainCommands.DisplayAllMeetings(filteredMeetings);
+                                                break;
+                                            }
+                                    }
                                     break;
                                 }
                         }
-                        /*
-                         Filter by description (if the description is “Jono .NET meetas”, searching for
-                         .NET should return this entry)
-                         Filter by responsible person /done
-                         Filter by category /done
-                         Filter by type /done
-                         Filter by dates (e.g meetings that will happen starting from 2022-01-01 /
-                         meetings that will happen between 2022-01-01 and 2022-02-01) /done
-                         Filter by the number of attendees (e.g show meetings that have over 10
-                         people attending) /partially done
-                        */
                         break;
                     case "E":
                         //Exit application
@@ -225,3 +239,11 @@
         }
     }
 }
+/*
+  Next: 
+ * Clean up this mess above and optimise code
+ * Move logic to separate file
+ * Change hard coded options (meeting categories, and meeting types) to enums
+ * Improove meeting class, person class
+ * Figure out and implement, how best to save and load data
+ */
