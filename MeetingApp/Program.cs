@@ -98,9 +98,8 @@ namespace MeetingApp
                         Console.WriteLine();
                         Console.Write("Choose a meeting to which you would like to edit (enter name): ");
                         var addParticipantMeetingName = MainCommands.GatherInput(Console.ReadLine());
-                        Console.WriteLine($"Chosen meeting: {addParticipantMeetingName}");
                         var editedMeeting = meetings.FirstOrDefault(meeting => meeting.Name == addParticipantMeetingName);
-                        //Add person to a meeting, and delete person from a meeting (unfinished)
+                        MainCommands.DisplayFullInfo(editedMeeting);
                         Console.WriteLine("Choose the following option from below.");
                         Console.WriteLine("'A' - Add person to a meeting; 'B' - Remove person from pas particular meeting;");
                         var userChoice3 = MainCommands.GetTwoChoices();
