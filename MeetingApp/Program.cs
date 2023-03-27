@@ -8,7 +8,7 @@ namespace MeetingApp
         static void Main(string[] args)
         {
             var programRun = true;
-            List<Meeting> meetings;
+            List<Meeting> ? meetings;
             var path = @"D:\meetingAppSaves\meetings.json";
 
             if (File.Exists(path))
@@ -28,7 +28,7 @@ namespace MeetingApp
                 // Main funcitionality of this app is unfinished
                 MainCommands.DisplayStartingChoises();
                 //Reads user input
-                var userChoise = MainCommands.GetChoice(Console.ReadLine().ToUpper());
+                var userChoise = MainCommands.GetChoice(Console.ReadLine()?.ToUpper());
 
                 switch (userChoise)
                 {
@@ -55,12 +55,12 @@ namespace MeetingApp
                         Console.WriteLine();
                         Console.WriteLine("Choose the following Category: ");
                         Console.Write("A: CodeMonkey; B: Hub; C: Short; D: TeamBuilding; ");
-                        var category = MainCommands.GetCategory(MainCommands.GetChoice(Console.ReadLine().ToUpper()));
+                        var category = MainCommands.GetCategory(MainCommands.GetChoice(Console.ReadLine()?.ToUpper()));
                         Console.WriteLine($"Meeting category:{category}");
                         Console.WriteLine();
                         Console.WriteLine("Choose the following meeting Type: ");
                         Console.Write("A: Live; B: InPerson;");
-                        var type = MainCommands.GetType(Console.ReadLine().ToUpper());
+                        var type = MainCommands.GetType(Console.ReadLine()?.ToUpper());
                         Console.WriteLine($"Meeting type: {type}");
                         Console.WriteLine();
                         Console.WriteLine("Set start date, and end date of the meeting:");
@@ -69,7 +69,7 @@ namespace MeetingApp
                         Console.WriteLine($"Meting start date: {startDate}, end date: {endDate}");
                         Console.WriteLine();
                         var meeting = new Meeting(name, description, responsiblePerson, category, type, startDate, endDate);
-                        meetings.Add(meeting);
+                        meetings?.Add(meeting);
                         break;
                     case "B":
                         //Delete a meeting
@@ -78,19 +78,19 @@ namespace MeetingApp
                         Console.Write("Enter name of the meeting you want to delete:");
                         var deletableMeetingName = MainCommands.GatherInput(Console.ReadLine());
                         Console.WriteLine($"Meeting to be deleted: {deletableMeetingName}");
-                        var deletableMeeting = meetings.FirstOrDefault(meeting => meeting.Name == deletableMeetingName);
+                        var deletableMeeting = meetings?.FirstOrDefault(meeting => meeting.Name == deletableMeetingName);
                         Console.WriteLine();
                         Console.Write("Enter person ID, who is responsible for this meeting:");
                         var responsibleId = MainCommands.GetId();
                         var resPerson = MainCommands.GetResponsiblePersonById(deletableMeeting, responsibleId);
-                        Console.WriteLine($"Responsible person: {resPerson.FirstName} {resPerson.LastName}");
+                        Console.WriteLine($"Responsible person: {resPerson?.FirstName} {resPerson?.LastName}");
                         Console.Write("Delete this meeting? Y 'Yes'/N 'No':");
                         Console.WriteLine();
                         var userChoice2 = MainCommands.GetYesNo();
                         if (userChoice2 == "Y")
                         {
                             MainCommands.DeleteMeeting(meetings, deletableMeeting, resPerson);
-                            Console.WriteLine($"Meeting {deletableMeeting.Name} has been deleted from list.");
+                            Console.WriteLine($"Meeting {deletableMeeting?.Name} has been deleted from list.");
                         }
                         break;
                     case "C":
@@ -98,7 +98,7 @@ namespace MeetingApp
                         Console.WriteLine();
                         Console.Write("Choose a meeting to which you would like to edit (enter name): ");
                         var addParticipantMeetingName = MainCommands.GatherInput(Console.ReadLine());
-                        var editedMeeting = meetings.FirstOrDefault(meeting => meeting.Name == addParticipantMeetingName);
+                        var editedMeeting = meetings?.FirstOrDefault(meeting => meeting.Name == addParticipantMeetingName);
                         MainCommands.DisplayFullInfo(editedMeeting);
                         Console.WriteLine("Choose the following option from below.");
                         Console.WriteLine("'A' - Add person to a meeting; 'B' - Remove person from pas particular meeting;");
@@ -124,7 +124,7 @@ namespace MeetingApp
                                     var date = MainCommands.GetDateTime("Enter date, from which this person will be added to the meeting: "); //a date, from which a person is being added
                                     var newParticipant = new Person(personId, personName, personSurname);
                                     MainCommands.AddParticipant(editedMeeting, newParticipant);
-                                    Console.WriteLine($"{newParticipant.FirstName} {newParticipant.LastName} is added to a meeting: {editedMeeting}");
+                                    Console.WriteLine($"{newParticipant?.FirstName} {newParticipant?.LastName} is added to a meeting: {editedMeeting}");
                                     break;
                                 }
                             case "B":
@@ -135,7 +135,7 @@ namespace MeetingApp
                                     var personId = MainCommands.GetId();
                                     Console.WriteLine($"Person ID: {personId}");
                                     Console.WriteLine(); 
-                                    MainCommands.RemoveParticipant(editedMeeting, editedMeeting._participants.FirstOrDefault(participant => participant.Id == personId));
+                                    MainCommands.RemoveParticipant(editedMeeting, editedMeeting?._participants.FirstOrDefault(participant => participant.Id == personId));
                                     break;
                                 }
                         }   
@@ -158,7 +158,7 @@ namespace MeetingApp
                                     Console.Write("Enter meeting description: ");
                                     var filteredString = MainCommands.GatherInput(Console.ReadLine());
                                     //Main filter by description, move to main commands needed
-                                    var filteredMeetings = meetings.Where(o => o.Description.Contains(filteredString)).ToList(); 
+                                    var filteredMeetings = meetings?.Where(o => o.Description.Contains(filteredString)).ToList(); 
                                     MainCommands.DisplayAllMeetings(filteredMeetings);
                                     break;
                                 }
@@ -168,7 +168,7 @@ namespace MeetingApp
                                     Console.Write("Enter responsible person ID: ");
                                     var filteredResponsiblePersonId = MainCommands.GetId();
                                     //Main filter by responsible person, move to main commands needed
-                                    var filteredMeetings = meetings.Where(o => o.ResponsiblePerson.Id.Equals(filteredResponsiblePersonId)).ToList();
+                                    var filteredMeetings = meetings?.Where(o => o.ResponsiblePerson.Id.Equals(filteredResponsiblePersonId)).ToList();
                                     MainCommands.DisplayAllMeetings(filteredMeetings);
                                     break;
                                 }
@@ -178,7 +178,7 @@ namespace MeetingApp
                                     Console.Write("Enter meeting category: ");
                                     var filteredCategory = MainCommands.GetCategory(MainCommands.GetChoice2());
                                     //main filter by category, move to main commands needed
-                                    var filteredMeetings = meetings.Where(o => o.Category.Equals(filteredCategory)).ToList();
+                                    var filteredMeetings = meetings?.Where(o => o.Category.Equals(filteredCategory)).ToList();
                                     MainCommands.DisplayAllMeetings(filteredMeetings);
                                     break;
                                 }
@@ -186,9 +186,9 @@ namespace MeetingApp
                                 {
                                     //Filter by type
                                     Console.Write("Enter meeting type: ");
-                                    var filteredType = MainCommands.GetType(MainCommands.GatherInput(Console.ReadLine().ToUpper()));
+                                    var filteredType = MainCommands.GetType(MainCommands.GatherInput(Console.ReadLine()?.ToUpper()));
                                     //main filter by type, move to main commands needed
-                                    var filteredMeetings = meetings.Where(o => o.Type.Equals(filteredType)).ToList();
+                                    var filteredMeetings = meetings?.Where(o => o.Type.Equals(filteredType)).ToList();
                                     MainCommands.DisplayAllMeetings(filteredMeetings);
                                     break;
                                 }
@@ -199,7 +199,7 @@ namespace MeetingApp
                                     var filteredStartDate = MainCommands.GetDateTime("Enter start Date (MM/dd/yyyy hh:mm:ss): ");
                                     var filteredEndDate = MainCommands.GetDateTime("Enter end Date (MM/dd/yyyy hh:mm:ss): ");
                                     //main filter by date range, move to main commands needed
-                                    var filteredMeetings = meetings.Where(o => o.StartDate >= filteredStartDate && o.EndDate <= filteredEndDate).ToList();
+                                    var filteredMeetings = meetings?.Where(o => o.StartDate >= filteredStartDate && o.EndDate <= filteredEndDate).ToList();
                                     MainCommands.DisplayAllMeetings(filteredMeetings);
                                     break;
                                 }
@@ -208,28 +208,28 @@ namespace MeetingApp
                                     //Filter by number of attendees, not finished
                                     Console.WriteLine("Specifiy, how you want to filter by number of attendees.");
                                     Console.Write("Enter attendees number to filter meetings by: ");
-                                    var filterNumber = int.Parse(Console.ReadLine());
+                                    var filterNumber = int.Parse(Console.ReadLine()); //reik perdaryti
                                     Console.WriteLine("Choose filter type.");
                                     Console.WriteLine("A: Equal to chosen number; B: More then chosen number; C: less then chosen number;");
                                     switch (MainCommands.GetChoice4())
                                     {
                                         case "A":
                                             {
-                                                var filteredMeetings = meetings.Where(o => o._participants.Count == filterNumber).ToList();
+                                                var filteredMeetings = meetings?.Where(o => o._participants.Count == filterNumber).ToList();
                                                 Console.WriteLine($"Meetings who have {filterNumber} attendees:");
                                                 MainCommands.DisplayAllMeetings(filteredMeetings);
                                                 break;
                                             }
                                         case "B":
                                             {
-                                                var filteredMeetings = meetings.Where(o => o._participants.Count >= filterNumber).ToList();
+                                                var filteredMeetings = meetings?.Where(o => o._participants.Count >= filterNumber).ToList();
                                                 Console.WriteLine($"Meetings who have more then {filterNumber} attendees:");
                                                 MainCommands.DisplayAllMeetings(filteredMeetings);
                                                 break;
                                             }
                                         case "C":
                                             {
-                                                var filteredMeetings = meetings.Where(o => o._participants.Count <= filterNumber).ToList();
+                                                var filteredMeetings = meetings?.Where(o => o._participants.Count <= filterNumber).ToList();
                                                 Console.WriteLine($"Meetings who have less then {filterNumber} attendees:");
                                                 MainCommands.DisplayAllMeetings(filteredMeetings);
                                                 break;

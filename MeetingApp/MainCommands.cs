@@ -24,19 +24,19 @@ namespace MeetingApp
         /// Reads, what was chosen by the user, and validates input. If inpud was incorrect, asks again to choose correctly, 5 choices
         /// </summary>
         /// <returns>Returns input value</returns>
-        internal static string GetChoice(string choice)
+        internal static string GetChoice(string ? choice)
         {
             string validatedChoice;
             while (true)
             {
-                if (choice.Length > 0 && (choice == "A" || choice == "B" || choice == "C" || choice == "D" || choice == "E"))
+                if (choice?.Length > 0 && (choice == "A" || choice == "B" || choice == "C" || choice == "D" || choice == "E"))
                 {
                     validatedChoice = choice;
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                    choice = Console.ReadLine().ToUpper();
+                    choice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
         }
@@ -46,16 +46,16 @@ namespace MeetingApp
         /// <returns>Returns input value</returns>
         internal static string GetChoice2()
         {
-            var validatedChoice = Console.ReadLine().ToUpper();
+            var validatedChoice = Console.ReadLine()?.ToUpper();
             while (true)
             {
-                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D"))
+                if (validatedChoice?.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D"))
                 {
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                validatedChoice = Console.ReadLine().ToUpper();
+                validatedChoice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
         }
@@ -88,19 +88,19 @@ namespace MeetingApp
         /// </summary>
         /// <param name="choice">User input based of Fixed values</param>
         /// <returns>Returns fixed value of Meeting Type </returns>
-        internal static string GetType(string choice)
+        internal static string GetType(string ? choice)
         {
             string validatedChoice;
             while (true)
             {
-                if (choice.Length > 0 && (choice == "A" || choice == "B"))
+                if (choice?.Length > 0 && (choice == "A" || choice == "B"))
                 {
                     validatedChoice = choice;
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                choice = Console.ReadLine().ToUpper();
+                choice = Console.ReadLine()?.ToUpper();
             }
             switch (validatedChoice)
             {
@@ -118,12 +118,12 @@ namespace MeetingApp
         /// </summary>
         /// <param name="input">Input which is reead from the console that user has entered</param>
         /// <returns>validated input</returns>
-        internal static string GatherInput(string input) 
+        internal static string GatherInput(string ? input) 
         {
             string validatedInput;
             while (true)
             {
-                if (input.Length > 0)
+                if (input?.Length > 0)
                 {
                     validatedInput = input;
                     break;
@@ -185,38 +185,38 @@ namespace MeetingApp
 /// <param name="meetings">Meeting list from witch a single meeting will be removed</param>
 /// <param name="meeting">A specific meeting to be removed</param>
 /// <param name="responsiblePerson">Person, who is responsible for a particular meeting</param>
-        internal static void DeleteMeeting(List<Meeting> meetings, Meeting meeting, Person responsiblePerson) 
+        internal static void DeleteMeeting(List<Meeting> ? meetings, Meeting ? meeting, Person ? responsiblePerson) 
         {
-            if (responsiblePerson != meeting.ResponsiblePerson)
+            if (responsiblePerson != meeting?.ResponsiblePerson)
                 Console.WriteLine("Delete meeting failed. Only responsible person can delete this meeting.");
             else
-                meetings.Remove(meeting);
+                meetings?.Remove(meeting);
         }
         /// <summary>
         /// Removes a participant from a specific meeting
         /// </summary>
         /// <param name="meeting">Specific meeting from witch a participant will be removed</param>
         /// <param name="memeber">Participant to be removed</param>
-        internal static void RemoveParticipant(Meeting meeting, Person memeber)
+        internal static void RemoveParticipant(Meeting ? meeting, Person ? memeber)
         {
-            if (meeting.ResponsiblePerson.Id == memeber.Id)
+            if (meeting?.ResponsiblePerson.Id == memeber?.Id)
                 Console.WriteLine("Responsible person cannot be removed from this particular meeting.");
             else
-                meeting._participants.Remove(meeting._participants.FirstOrDefault(memeber));
+                meeting?._participants.Remove(meeting?._participants.FirstOrDefault(memeber));
         }
         /// <summary>
         /// Displays a full info of a particular meeting (unfinished, filters needed)
         /// </summary>
         /// <param name="meeting">Specific meeting, who's info is to be displayed</param>
-        internal static void DisplayFullInfo(Meeting meeting)
+        internal static void DisplayFullInfo(Meeting ? meeting)
         {
-            Console.WriteLine($"Meeting name: {meeting.Name}");
-            Console.WriteLine($"Meeting Description: {meeting.Description}");
-            Console.WriteLine($"Meeting Responsible person: { meeting.ResponsiblePerson.FirstName} {meeting.ResponsiblePerson.LastName}");
-            Console.WriteLine($"Meeting Category: {meeting.Category}");
-            Console.WriteLine($"Meeting Type: {meeting.Type}");
-            Console.WriteLine($"Meeting Start date: {meeting.StartDate}");
-            Console.WriteLine($"Meeting End date: {meeting.EndDate}");
+            Console.WriteLine($"Meeting name: {meeting?.Name}");
+            Console.WriteLine($"Meeting Description: {meeting?.Description}");
+            Console.WriteLine($"Meeting Responsible person: { meeting?.ResponsiblePerson.FirstName} {meeting?.ResponsiblePerson.LastName}");
+            Console.WriteLine($"Meeting Category: {meeting?.Category}");
+            Console.WriteLine($"Meeting Type: {meeting?.Type}");
+            Console.WriteLine($"Meeting Start date: {meeting?.StartDate}");
+            Console.WriteLine($"Meeting End date: {meeting?.EndDate}");
             DisplayParticipants(meeting);
             Console.WriteLine();
         }
@@ -225,7 +225,7 @@ namespace MeetingApp
         /// </summary>
         /// <param name="meetings">List of all meetings that will be saved to .json file</param>
         /// <param name="path">Path of the file, that data should be saved</param>
-        internal static void SaveData(List<Meeting> meetings, string path)
+        internal static void SaveData(List<Meeting> ? meetings, string path)
         {
             string json = JsonConvert.SerializeObject(meetings);
             if (!File.Exists(path))
@@ -245,31 +245,31 @@ namespace MeetingApp
         /// Displays all members of a meeting (unfinished, filters needed)
         /// </summary>
         /// <param name="meeting">Specific meeting, who's participants will be displayed</param>
-        internal static void DisplayParticipants(Meeting meeting)
+        internal static void DisplayParticipants(Meeting ? meeting)
         {
             Console.WriteLine("Members of the meeting:");
-            for (var i = 0; i < meeting._participants.Count; i++)
-                Console.WriteLine($"{ meeting._participants[i].FirstName} { meeting._participants[i].LastName}");
+            for (var i = 0; i < meeting?._participants.Count; i++)
+                Console.WriteLine($"{ meeting?._participants[i].FirstName} { meeting?._participants[i].LastName}");
         }
         /// <summary>
         /// Adds a person to the participants of that meeting (not finished).
         /// </summary>
         /// <param name="meeting">A meeting, to witch a participant will be added</param>
         /// <param name="member">A person, who will be added to the participants list</param>
-        internal static void AddParticipant(Meeting meeting, Person member)
+        internal static void AddParticipant(Meeting ? meeting, Person member)
         {
-            if (meeting._participants.Contains(member) || meeting.ResponsiblePerson.Id == member.Id)
+            if (meeting._participants.Contains(member) || meeting?.ResponsiblePerson.Id == member.Id)
                 Console.WriteLine("This person is already in a meeting. Unable to add.");
             else
-                meeting._participants.Add(member);
+                meeting?._participants.Add(member);
         }
         /// <summary>
         /// Displays list of all meetings (unfinished, filters needed)
         /// </summary>
         /// <param name="meetings">List of all meetings to be displayed</param>
-        internal static void DisplayAllMeetings(List<Meeting> meetings) 
+        internal static void DisplayAllMeetings(List<Meeting> ? meetings) 
         {
-            for (var i = 0; i < meetings.Count; i++)
+            for (var i = 0; i < meetings?.Count; i++)
                 Console.WriteLine($"{meetings[i].Name}");
         }
         /// <summary>
@@ -278,11 +278,11 @@ namespace MeetingApp
         /// <param name="meeting">Meeting, from which person is needed</param>
         /// <param name="id">Specific person ID</param>
         /// <returns>Full info for a particular person</returns>
-        internal static Person GetResponsiblePersonById(Meeting meeting, int id)
+        internal static Person ? GetResponsiblePersonById(Meeting ? meeting, int ? id)
         {
-            if (!(meeting.ResponsiblePerson.Id == id))
+            if (!(meeting?.ResponsiblePerson.Id == id))
                 Console.WriteLine("Person is not responsible for this meeting, try again:");
-            return meeting.ResponsiblePerson;
+            return meeting?.ResponsiblePerson;
         }
         /// <summary>
         /// Simple method to read user choice in a form "Yes" and "No"
@@ -290,16 +290,16 @@ namespace MeetingApp
         /// <returns>Validated user input</returns>
         internal static string GetYesNo()
         {
-            string validatedChoice = Console.ReadLine().ToUpper();
+            string ? validatedChoice = Console.ReadLine()?.ToUpper();
             while (true)
             {
-                if (validatedChoice.Length > 0 && (validatedChoice == "Y" || validatedChoice == "N"))
+                if (validatedChoice?.Length > 0 && (validatedChoice == "Y" || validatedChoice == "N"))
                 {
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                validatedChoice = Console.ReadLine().ToUpper();
+                validatedChoice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
 
@@ -310,16 +310,16 @@ namespace MeetingApp
         /// <returns>Validated user input</returns>
         internal static string GetTwoChoices()
         {
-            string validatedChoice = Console.ReadLine().ToUpper();
+            string ? validatedChoice = Console.ReadLine()?.ToUpper();
             while (true)
             {
-                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B"))
+                if (validatedChoice?.Length > 0 && (validatedChoice == "A" || validatedChoice == "B"))
                 {
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                validatedChoice = Console.ReadLine().ToUpper();
+                validatedChoice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
         }
@@ -329,16 +329,16 @@ namespace MeetingApp
         /// <returns>Returns input value</returns>
         internal static string GetChoice3()
         {
-            string validatedChoice = Console.ReadLine().ToUpper();
+            string ? validatedChoice = Console.ReadLine()?.ToUpper();
             while (true)
             {
-                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D" || validatedChoice == "E" || validatedChoice == "F"))
+                if (validatedChoice?.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C" || validatedChoice == "D" || validatedChoice == "E" || validatedChoice == "F"))
                 {
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                validatedChoice = Console.ReadLine().ToUpper();
+                validatedChoice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
         }
@@ -348,16 +348,16 @@ namespace MeetingApp
         /// <returns></returns>
         internal static string GetChoice4()
         {
-            var validatedChoice = Console.ReadLine().ToUpper();
+            var validatedChoice = Console.ReadLine()?.ToUpper();
             while (true)
             {
-                if (validatedChoice.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C"))
+                if (validatedChoice?.Length > 0 && (validatedChoice == "A" || validatedChoice == "B" || validatedChoice == "C"))
                 {
                     break;
                 }
                 else
                     Console.WriteLine("Wrong input, try again: ");
-                validatedChoice = Console.ReadLine().ToUpper();
+                validatedChoice = Console.ReadLine()?.ToUpper();
             }
             return validatedChoice;
         }
