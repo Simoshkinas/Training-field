@@ -1,4 +1,6 @@
-﻿namespace MeetingApp
+﻿using System.Text.Json;
+
+namespace MeetingApp
 {
     internal class Program
     {
@@ -6,7 +8,13 @@
         {
             var programRun = true;
             var meetings = new List<Meeting>();
-            
+            var path = @"D:\meetingAppSaves\meetings.json";
+
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                meetings = JsonSerializer.Deserialize<List<Meeting>>(json);
+            }
             //Message to be displayed when starting an app
             MainCommands.GiveGreeting();
             //Gives choises for the user
@@ -230,6 +238,7 @@
                     case "E":
                         //Exit application
                         Console.WriteLine("Thank you for using this app. Have a nice day!");
+                        MainCommands.SaveData(meetings, @"D:\meetingAppSaves\meetings.json");
                         programRun = false;
                         break;
                 }
@@ -245,5 +254,6 @@
  * Move logic to separate file
  * Change hard coded options (meeting categories, and meeting types) to enums
  * Improove meeting class, person class
- * Figure out and implement, how best to save and load data
+ * Figure out and implement, how best to save and load data - works kind of, needs rework 
+ * Unit tests arte missing
  */

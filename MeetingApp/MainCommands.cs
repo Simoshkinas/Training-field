@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace MeetingApp
 {
@@ -220,13 +220,25 @@ namespace MeetingApp
             Console.WriteLine();
         }
         /// <summary>
-        /// Saves a meeting to JSON file (unfinished)
+        /// Saves a meeting to JSON file 
         /// </summary>
-        /// <param name="meeting">Specific meeting, who's data will be saved</param>
-        internal static void SaveData(Meeting meeting, string path)
+        /// <param name="meetings">List of all meetings that will be saved to .json file</param>
+        /// <param name="path">Path of the file, that data should be saved</param>
+        internal static void SaveData(List<Meeting> meetings, string path)
         {
-            string json = JsonConvert.SerializeObject(meeting, Formatting.Indented);
-            File.WriteAllText(path, json);
+            string json = JsonSerializer.Serialize(meetings);
+            if (!File.Exists(path))
+            {
+                string directoryPath = "D:\\meetingAppSaves\\";
+                string fileName = "meetings.json";
+                string filePath = Path.Combine(directoryPath, fileName);
+                Directory.CreateDirectory(directoryPath);
+                File.WriteAllText(filePath, json);
+            }
+            else
+            {
+                File.WriteAllText(path, json);
+            }
         }
         /// <summary>
         /// Displays all members of a meeting (unfinished, filters needed)
