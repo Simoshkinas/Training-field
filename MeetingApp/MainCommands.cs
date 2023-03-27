@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace MeetingApp
 {
@@ -226,7 +227,7 @@ namespace MeetingApp
         /// <param name="path">Path of the file, that data should be saved</param>
         internal static void SaveData(List<Meeting> meetings, string path)
         {
-            string json = JsonSerializer.Serialize(meetings);
+            string json = JsonConvert.SerializeObject(meetings);
             if (!File.Exists(path))
             {
                 string directoryPath = "D:\\meetingAppSaves\\";

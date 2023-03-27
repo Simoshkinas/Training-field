@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace MeetingApp
 {
@@ -7,13 +8,17 @@ namespace MeetingApp
         static void Main(string[] args)
         {
             var programRun = true;
-            var meetings = new List<Meeting>();
+            List<Meeting> meetings;
             var path = @"D:\meetingAppSaves\meetings.json";
 
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                meetings = JsonSerializer.Deserialize<List<Meeting>>(json);
+                meetings = JsonConvert.DeserializeObject<List<Meeting>>(json);
+            }
+            else
+            {
+                meetings = new List<Meeting>();
             }
             //Message to be displayed when starting an app
             MainCommands.GiveGreeting();
