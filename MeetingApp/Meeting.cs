@@ -2,10 +2,7 @@
 {
     internal class Meeting
     {
-        #region Fields
-        internal List<Person> _participants;
-        #endregion
-        #region Properties
+        internal List<Person> ? Participants { get; set; }
         internal string Name { get; set; }
         internal string Description { get; set; }
         internal Person ResponsiblePerson { get; set; }
@@ -13,8 +10,6 @@
         internal string Type { get; set; }
         internal DateTime StartDate { get; set; }
         internal DateTime EndDate { get; set; }
-        #endregion
-        #region Constructor
         /// <summary>
         /// Constructor with parameters to create a new meeting object
         /// </summary>
@@ -40,10 +35,7 @@
             Type = type;
             StartDate = startDate;
             EndDate = endDate;
-            _participants = new List<Person>();
-        }
-        #endregion
-
-        
+            Participants = new List<Person>();
+        }        
     }
 }

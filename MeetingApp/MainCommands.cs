@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json;
-
 namespace MeetingApp
 {
     internal static class MainCommands
@@ -135,10 +133,10 @@ namespace MeetingApp
             return validatedInput;
         }
         /// <summary>
-        /// Reads ID given by the user, a specific parameter, which is validated
+        /// Reads an integer given by the user, a specific parameter, which is validated
         /// </summary>
-        /// <returns>Returns a validated ID value</returns>
-        internal static int GetId()
+        /// <returns>Returns a validated integer value</returns>
+        internal static int GetInt()
         {
             var str = Console.ReadLine();
             if (!(int.TryParse(str, out var number)))
@@ -202,7 +200,7 @@ namespace MeetingApp
             if (meeting?.ResponsiblePerson.Id == memeber?.Id)
                 Console.WriteLine("Responsible person cannot be removed from this particular meeting.");
             else
-                meeting?._participants.Remove(meeting?._participants.FirstOrDefault(memeber));
+                meeting?.Participants?.Remove(meeting.Participants.FirstOrDefault(memeber));
         }
         /// <summary>
         /// Displays a full info of a particular meeting (unfinished, filters needed)
@@ -248,20 +246,26 @@ namespace MeetingApp
         internal static void DisplayParticipants(Meeting ? meeting)
         {
             Console.WriteLine("Members of the meeting:");
-            for (var i = 0; i < meeting?._participants.Count; i++)
-                Console.WriteLine($"{ meeting?._participants[i].FirstName} { meeting?._participants[i].LastName}");
+            for (var i = 0; i < meeting?.Participants?.Count; i++)
+                Console.WriteLine($"{ meeting?.Participants[i].FirstName} { meeting?.Participants[i].LastName}");
         }
         /// <summary>
         /// Adds a person to the participants of that meeting (not finished).
         /// </summary>
         /// <param name="meeting">A meeting, to witch a participant will be added</param>
         /// <param name="member">A person, who will be added to the participants list</param>
-        internal static void AddParticipant(Meeting ? meeting, Person member)
+        internal static void AddParticipant(Meeting ? meeting, Person ? member)
         {
-            if (meeting._participants.Contains(member) || meeting?.ResponsiblePerson.Id == member.Id)
+            if (meeting?.ResponsiblePerson.Id == member?.Id)
+            {
                 Console.WriteLine("This person is already in a meeting. Unable to add.");
+            }
+            else if (meeting.Participants.Contains(member))
+            {
+                Console.WriteLine("This person is already in a meeting. Unable to add.");
+            }
             else
-                meeting?._participants.Add(member);
+            meeting?.Participants.Add(member);
         }
         /// <summary>
         /// Displays list of all meetings (unfinished, filters needed)
