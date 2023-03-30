@@ -145,7 +145,7 @@ namespace MeetingApp
                         */
                         break;
                     case "D":
-                        //List all meetings, unfinished
+                        //List all meetings
                         Console.WriteLine("Choose the parameter you want to filter all meetings by:");
                         Console.WriteLine("A: Description; B: Responsible Person; C: Category; D: Type; E: Dates; F: Number of attendees;");
                         var userChoice4 = MainCommands.GetChoice3();
